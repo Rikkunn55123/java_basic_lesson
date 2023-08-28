@@ -260,7 +260,7 @@ public class Ques1_13 {
 		// Ques11で変換した年齢・身長を整数型にして変換して出力
 		
 		System.out.println(Integer.parseInt(ageS));
-		//double型を経由してからint型へ変換
+		// double型を経由してからint型へ変換
 		System.out.println((int)Double.parseDouble(heightS));
 		
 		
@@ -271,9 +271,6 @@ public class Ques1_13 {
 		
 		// Ques12で変換した年齢・身長で、年齢が２５もしくは身長が160以上であればTureを出力
 		System.out.println(age == 25 || height >= 160);
-		
-		
-		
 		
 		
 	}
