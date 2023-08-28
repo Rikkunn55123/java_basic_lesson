@@ -43,15 +43,15 @@ public class Ques1_13 {
 
 		num_int = 0;
 
-		num_long = 0;
+		num_long = 0l;
 
-		num_float = 0;
+		num_float = 0.0f;
 
-		num_double = 0;
+		num_double = 0.0d;
 
-		char1 = 0;
+		char1 = '\u0000';
 
-		str = "";
+		str = null;
 
 		boo = false;
 
@@ -272,6 +272,7 @@ public class Ques1_13 {
 		System.out.println(age == 25 || height >= 160);
 		
 		
+	
 	}
 
 }
