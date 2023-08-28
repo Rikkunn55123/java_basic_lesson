@@ -269,7 +269,7 @@ public class Ques1_13 {
 		// ***** Ques13 *****;
 		System.out.println("***** Ques13 *****");
 		
-		// Ques12で変換した年齢・身長で、年齢が２５もしくは身長が160以上であればTureを出力
+		// Ques12で変換した年齢・身長で、年齢が２５もしくは身長が160以上であればTrueを出力
 		System.out.println(age == 25 || height >= 160);
 		
 		
