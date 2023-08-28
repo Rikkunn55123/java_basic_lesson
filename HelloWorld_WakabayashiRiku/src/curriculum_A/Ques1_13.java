@@ -158,7 +158,6 @@ public class Ques1_13 {
 		System.out.println("好きな食べ物は" + food + "です");
 
 		
-		
 		System.out.println();
 		
 		// ***** Ques7 *****
