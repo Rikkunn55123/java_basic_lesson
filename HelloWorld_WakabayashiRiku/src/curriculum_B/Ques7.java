@@ -6,6 +6,9 @@ public class Ques7 {
 
 	public static void main(String[] args) {
 
+		// 教科を配列として代入
+		String[] subjects = { "英語", "数学", "理科", "社会" };
+
 		// スキャナー初期化
 		Scanner sc = new Scanner(System.in);
 		// 入力メッセージ表示
@@ -13,86 +16,73 @@ public class Ques7 {
 		// 生徒の人数を取得
 		int numPeople = sc.nextInt();
 
-		// 生徒の人数分の、4個ずつ値を持つ配列を作成
-		int[][] tests = new int[numPeople][4];
+		// 生徒の人数分の、教科の数ずつ値を持つ配列を作成
+		int[][] tests = new int[numPeople][subjects.length];
+
+		/***** 点数入力処理 *****/
 
 		// 「このプログラムの実行は1回以上行われるようにしてください」なのでdo whileで繰り返し処理を行う
 		int num = 0;
 		do {
-			System.out.println((num + 1) + "人目の『英語』の点数を入力してください ：");
-			// num人目の一つ目の値
-			tests[num][0] = sc.nextInt();
-
-			System.out.println((num + 1) + "人目の『数学』の点数を入力してください ：");
-			// num人目の二つ目の値
-			tests[num][1] = sc.nextInt();
-
-			System.out.println((num + 1) + "人目の『理科』の点数を入力してください ：");
-			// num人目の三つ目の値
-			tests[num][2] = sc.nextInt();
-
-			System.out.println((num + 1) + "人目の『社会』の点数を入力してください ：");
-			// num人目の四つ目の値
-			tests[num][3] = sc.nextInt();
-			// 改行
-			System.out.println();
+			// 教科数だけくり返す
+			for (int i = 0; i < subjects.length; i++) {
+				// 一人につき教科分だけ入力させる
+				System.out.println((num + 1) + "人目の『" + subjects[i] + "』の点数を入力してください ：");
+				tests[num][i] = sc.nextInt();
+			}
 			// カウンター変数を増加
 			num++;
 			// これを人数分行う
 		} while (num < numPeople);
 
 		/***** 個人の平均点出力処理 *****/
-		int i = 0;
+		int j = 0;
 		do {
 			// 合計用変数
 			int sumPers = 0;
 			// i人目のテストの点すべてに対して
-			for (int n : tests[i]) {
+			for (int n : tests[j]) {
 				// 合計に足していき
 				sumPers += n;
 			}
 			// テスト科目数　4で合計を割った値を出力
 			double avePers = (sumPers / 4.00);
 			// 小数点以下２ケタで指定
-			System.out.println((i + 1) + "人目の平均点は" + String.format("%.2f", avePers) + "点です。");
+			System.out.printf("%s人目の平均点は%.2fです。\n", (j + 1), avePers);
+
 			//カウンター増加
-			i++;
+			j++;
 			// 人数分くり返す
-		} while (i < numPeople);
+		} while (j < numPeople);
 
 		/***** 科目の平均点処理 *****/
 
-		// 合計用変数を宣言
-		int sumEng = 0;
-		int sumMath = 0;
-		int sumSci = 0;
-		int sumSoci = 0;
+		// 全体合計用の変数
+		int sumTotal = 0;
 
-		// 人数分くり返す
-		for (int n = 0; n < numPeople; n++) {
-			
-			//　n人目のテスト結果を科目ごとに足す
-			sumEng += tests[n][0];
-			sumMath += tests[n][1];
-			sumSci += tests[n][2];
-			sumSoci += tests[n][3];
+		// 科目数だけ繰り返す
+		for (int k = 0; k < subjects.length; k++) {
+
+			// 科目ごとの合計用変数
+			int sumSubjects = 0;
+
+			// 人数分くり返す
+			for (int l = 0; l < numPeople; l++) {
+				// 科目ごとに人数分の点数が足される
+				sumSubjects += tests[l][k];
+				// 合計用変数にも足す
+				sumTotal += tests[l][k];
+			}
+			// 科目ごとの平均点を出して出力
+			double ave = (double) sumSubjects / (double) numPeople;
+			System.out.printf("%sの平均点は%.2f点です。\n", subjects[k], ave);
+
 		}
-		// 全員分の合計を、人数で割る
-		double aveEng = ((double) sumEng / (double) numPeople);
-		double aveMath = (((double) sumMath / (double) numPeople));
-		double aveSci = ((double) sumSci / (double) numPeople);
-		double aveSoci = ((double) sumSoci / (double) numPeople);
-		
-		// 出力
-		System.out.println("英語の平均点は" + String.format("%.2f", aveEng) + "点です。");
-		System.out.println("数学の平均点は" + String.format("%.2f", aveMath) + "点です。");
-		System.out.println("理科の平均点は" + String.format("%.2f", aveSci) + "点です。");
-		System.out.println("社会の平均点は" + String.format("%.2f", aveSoci) + "点です。");
-		// 科目ごとの平均点を足して、科目数で割って全体の平均点を出力
-		System.out.println("全体の平均点は" + String.format("%.2f", ((aveEng + aveMath + aveSci + aveSoci) / 4)) + "点です。");
-		
+		// 全体合計から、平均を出力
+		double aveTotal = ((double) sumTotal / (double) subjects.length) / (double) numPeople;
+		System.out.printf("全体の平均点は%.2f点です。", aveTotal);
 		// スキャナー閉じる
 		sc.close();
-	}
 
+	}
 }

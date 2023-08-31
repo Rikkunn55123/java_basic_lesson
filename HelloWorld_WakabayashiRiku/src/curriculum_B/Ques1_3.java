@@ -1,5 +1,6 @@
 package curriculum_B;
 
+import java.util.Optional;
 // scanner,randomを使うためのクラスをインポート
 import java.util.Random;
 import java.util.Scanner;
@@ -13,19 +14,20 @@ public class Ques1_3 {
 
 		// 名前を入力させる
 		String name = sc.nextLine();
+		// optional宣言
+		Optional<String> value = Optional.ofNullable(name);
 
 		/****** 文字数のチェック ******/
 
-		// 10文字を超えた場合
-		if (name.length() > 10) {
-			System.out.println("「名前を10文字以内にしてください」");
+		// nullの時、または０文字以下の場合
+		if (value.isEmpty() || name.length() <= 0) {
+			System.out.println("「名前を入力してください」");
 			// 処理を中止
 			sc.close();
 			return;
-
-			// 名前がnull もしくは０文字以下の場合
-		} else if (name == null || name.length() <= 0) {
-			System.out.println("「名前を入力してください」");
+			// 10文字を超えた場合
+		} else if (name.length() > 10) {
+			System.out.println("「名前を10文字以内にしてください」");
 			// 処理を中止
 			sc.close();
 			return;
@@ -48,112 +50,60 @@ public class Ques1_3 {
 		/****** じゃんけんの処理 ******/
 
 		// じゃんけんの回数をカウントする変数
-		int total = 1;
+		int total = 0;
 		// じゃんけんでユーザーが勝利したかの判定用変数
 		boolean win = false;
 
 		/***** ユーザーが負けている間くり返す *****/
 		while (!win) {
 
+			//対戦回数を１増加
+			total++;
+
 			// ユーザーの手を入力させる
 			int userHand = sc.nextInt();
-
-			// 入力された整数に対応する出力
-			switch (userHand) {
-			case 0:
-				System.out.println(name + "の手は「グー」");
-				break;
-			case 1:
-				System.out.println(name + "の手は「チョキ」");
-				break;
-			case 2:
-				System.out.println(name + "の手は「パー」");
-				break;
-			// 0,1,2以外が入力されたらスキップして再入力させる
-			default:
-				continue;
-			}
 
 			// 相手の手を選ぶための乱数を用意
 			Random rand = new Random();
 			// じゃんけんの手は3つなので、0～2の範囲で
-			int compHand = rand.nextInt(2);
+			int compHand = rand.nextInt(3);
 
-			// 相手の手を出力する処理
-			switch (compHand) {
-			case 0:
-				System.out.println("相手の手は「グー」");
-				break;
-			case 1:
-				System.out.println("相手の手は「チョキ」");
-				break;
-			case 2:
-				System.out.println("相手の手は「パー」");
-			}
-			System.out.println();
+			// じゃんけんの手を出力
+			System.out.println(name + "の手は「" + (userHand == 0 ? "グー" : userHand == 1 ? "チョキ" : "パー") + "」");
+			System.out.println("相手の手は「" + (compHand == 0 ? "グー" : compHand == 1 ? "チョキ" : "パー") + "」");
 
 			/****** じゃんけんの結果の処理 ******/
 
-			// ユーザーと相手の手が同じ(あいこの場合)
-			if (userHand == compHand) {
-				System.out.println("DRAW　あいこ　もう一回しましょう！");
-				//対戦回数を１増加
-				total++;
-
-			} else {
-				// ユーザーの手ごとに処理
-				switch (userHand) {
-
-				//　0：グーの時
-				case 0:
-					// 相手がチョキの時
-					if (compHand == 1) {
-						// 勝利判定
-						win = true;
-						// 負けた時
-					} else {
-						System.out.println("俺の勝ち！");
-						System.out.println("負けは次につながるチャンスです！");
-						System.out.println("ネバーギブアップ！");
-						// 対戦数増加
-						total++;
-					}
-					// breakを入れる
-					break;
-				// 1：チョキの時
-				case 1:
-					// 相手がパーなら
-					if (compHand == 2) {
-						// 勝利判定
-						win = true;
-						// そうでないなら
-					} else {
-						System.out.println("俺の勝ち！");
-						System.out.println("たかがじゃんけん、そう思ってないですか？");
-						System.out.println("それやったら次も、俺が勝ちますよ");
-						// 対戦数増加
-						total++;
-					}
-					// breakを入れる
-					break;
-				// 2：パーの時
-				case 2:
-					// 相手がグーなら
-					if (compHand == 0) {
-						// 勝利判定
-						win = true;
-						// そうでないなら
-					} else {
-						System.out.println("俺の勝ち！");
-						System.out.println("なんで負けたか、明日まで考えといてください。");
-						System.out.println("そしたら何かが見えてくるはずです");
-						// 対戦数増加
-						total++;
-					}
-				}
+			// ユーザーと相手の数値を文字列結合して、その結果で分岐
+			String result = Integer.toString(userHand) + Integer.toString(compHand);
+			switch (result) {
+			/***** 負けた時 *****/
+			// グー
+			case "02":
+				System.out.print("俺の勝ち！\n負けは次につながるチャンスです！\nネバーギブアップ！\n");
+				break;
+			// チョキ
+			case "10":
+				System.out.print("俺の勝ち！\nたかがじゃんけん、そう思ってないですか？\nそれやったら次も、俺が勝ちますよ\n");
+				break;
+			// パー
+			case "20":
+				System.out.print("俺の勝ち！\nなんで負けたか、明日まで考えといてください。\nそしたら何かが見えてくるはずです\n");
+				break;
+			/***** あいこの時 *****/
+			case "00":
+			case "11":
+			case "22":
+				System.out.println("DRAW あいこ もう一回しましょう！");
+				break;
+			/***** 勝ったとき *****/
+			default:
+				win = true;
+				break;
 			}
 
 		}
+
 		// 繰り返しを抜けたとき＝勝利したとき
 		System.out.println("やるやん。");
 		System.out.println("次は俺にリベンジさせて");
