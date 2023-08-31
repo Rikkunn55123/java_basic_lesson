@@ -45,10 +45,10 @@ public class Ques7 {
 				// 合計に足していき
 				sumPers += n;
 			}
-			// テスト科目数　4で合計を割った値を出力
-			double avePers = (sumPers / 4.00);
+			// テスト科目数で割る
+			double avePers = (sumPers / (double)subjects.length);
 			// 小数点以下２ケタで指定
-			System.out.printf("%s人目の平均点は%.2fです。\n", (j + 1), avePers);
+			System.out.printf("%s人目の平均点は%.2fです。%n", (j + 1), avePers);
 
 			//カウンター増加
 			j++;
@@ -75,7 +75,7 @@ public class Ques7 {
 			}
 			// 科目ごとの平均点を出して出力
 			double ave = (double) sumSubjects / (double) numPeople;
-			System.out.printf("%sの平均点は%.2f点です。\n", subjects[k], ave);
+			System.out.printf("%sの平均点は%.2f点です。%n", subjects[k], ave);
 
 		}
 		// 全体合計から、平均を出力
