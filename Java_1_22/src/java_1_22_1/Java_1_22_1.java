@@ -25,6 +25,8 @@ public class Java_1_22_1 {
 
 		// 処理用クラスのインスタンス作成
 		Java_1_22_2 object = new Java_1_22_2();
+		// インスタンスでメソッド呼び出し
+		object.Hello();
 	}
 
 }
