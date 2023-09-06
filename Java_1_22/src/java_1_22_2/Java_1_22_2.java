@@ -27,6 +27,7 @@ public class Java_1_22_2 {
 		// 指定されたフォーマットでインスタンス作成
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/mm/dd hh:mm:ss");
 
+		
 		// 呼び出し元が持つ情報を入れながら文章表示
 		System.out.println("こんにちは！ここは" + this.country + "です！");
 		System.out.println("この" + this.food + "はうまい");
