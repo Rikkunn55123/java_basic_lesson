@@ -6,12 +6,31 @@ public class Animal {
 	private double height;
 	private int speed;
 
-	// セッターで各情報をセット
-	public void setProfile(String name, double height, int speed) {
+	// コンストラクタでセッター呼び出し
+	Animal(String name, double height, int speed) {
+		setName(name);
+		setHeight(height);
+		setSpeed(speed);
+	}
+
+	/***** セッター *****/
+
+	// 名前のセッター	
+	public void setName(String name) {
 		this.name = name;
+	}
+
+	// 体長のセッター
+	public void setHeight(double height) {
 		this.height = height;
+	}
+
+	// 速度のセッター
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+
+	/***** ゲッター *****/
 
 	// 名前を返すゲッター
 	public String getName() {
@@ -28,7 +47,8 @@ public class Animal {
 		return this.speed;
 	}
 
-	// 出力用メソッド
+	/***** 出力用メソッド *****/
+	
 	public void printProfile(String name, double height, int speed) {
 		System.out.println("動物名：" + name);
 		System.out.println("体長：" + height + "m");
